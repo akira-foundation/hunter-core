@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core\Core;
 
+use Core\Core\Commands\CoreCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Core\Core\Commands\CoreCommand;
 
-class CoreServiceProvider extends PackageServiceProvider
+final class CoreServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {

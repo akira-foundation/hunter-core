@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core\Core\Commands;
 
 use Illuminate\Console\Command;
 
-class CoreCommand extends Command
+final class CoreCommand extends Command
 {
     public $signature = 'hunter-core';
 

@@ -1,30 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core\Core\Tests;
 
+use Akira\Debugger\DebuggerServiceProvider;
+use Core\Core\CoreServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Core\Core\CoreServiceProvider;
+use Override;
 
-class TestCase extends Orchestra
+abstract class TestCase extends Orchestra
 {
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Core\\Core\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            static fn (string $modelName): string => 'Core\Core\Database\Factories\\' . class_basename($modelName) . 'Factory',
         );
     }
 
-    protected function getPackageProviders($app)
-    {
-        return [
-            CoreServiceProvider::class,
-        ];
-    }
-
-    public function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
 
@@ -33,5 +31,13 @@ class TestCase extends Orchestra
             (include $migration->getRealPath())->up();
          }
          */
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [
+            CoreServiceProvider::class,
+            DebuggerServiceProvider::class,
+        ];
     }
 }

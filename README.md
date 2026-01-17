@@ -1,11 +1,11 @@
-# This is my package hunter-core
+# Hunter Core
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hunter/hunter-core.svg?style=flat-square)](https://packagist.org/packages/hunter/hunter-core)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/hunter/hunter-core/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/hunter/hunter-core/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/hunter/hunter-core/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/hunter/hunter-core/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/hunter/hunter-core.svg?style=flat-square)](https://packagist.org/packages/hunter/hunter-core)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Hunter Core is a foundational Laravel package that provides shared utilities, base components, and essential services for Hunter, the Cape Verdean social network platform. It serves as the central dependency for all Hunter packages, ensuring consistency and reducing code duplication across the platform.
 
 ## Support us
 
@@ -20,7 +20,7 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require hunter/hunter-core
+composer require hunter/core
 ```
 
 You can publish and run the migrations with:
