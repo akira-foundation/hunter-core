@@ -1,0 +1,23 @@
+name: "Feature Request"
+description: "Suggest a new feature or improvement"
+title: "[Feature]: "
+labels: ["feature"]
+body:
+
+  - type: markdown
+    attributes:
+      value: "Thanks for taking the time to propose a new feature!"
+
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to Solve
+      description: Explain **why** this feature should exist. What problem or limitation does it address?
+      placeholder: |
+        - What is missing?
+        - What limitation exists?
+        - Why is this needed?
+    validations:
+      required: false
+
