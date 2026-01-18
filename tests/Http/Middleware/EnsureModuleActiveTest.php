@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use Hunter\Core\Http\Middleware\EnsureModuleActive;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 describe('EnsureModuleActive middleware', function (): void {
@@ -11,7 +13,7 @@ describe('EnsureModuleActive middleware', function (): void {
         $middleware = new EnsureModuleActive();
         $request    = Request::create('/test');
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('aborts with 403 when user has no tenant method', function (): void {
@@ -23,9 +25,9 @@ describe('EnsureModuleActive middleware', function (): void {
             public string $name = 'Test User';
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('aborts with 403 when tenant is null from tenant method', function (): void {
@@ -40,9 +42,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('aborts with 403 when tenant is null from tenant property', function (): void {
@@ -54,9 +56,9 @@ describe('EnsureModuleActive middleware', function (): void {
             public ?object $tenant = null;
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('aborts with 403 when tenant is null from currentTenant method', function (): void {
@@ -71,9 +73,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('passes when tenant hasModule returns true', function (): void {
@@ -98,9 +100,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $response = $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $response = $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
 
         expect($response->getContent())->toBe('ok');
     });
@@ -127,9 +129,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('passes when module found in tenant modules with identifier method', function (): void {
@@ -169,9 +171,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $response = $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $response = $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
 
         expect($response->getContent())->toBe('ok');
     });
@@ -207,9 +209,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $response = $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $response = $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
 
         expect($response->getContent())->toBe('ok');
     });
@@ -243,9 +245,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $response = $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $response = $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
 
         expect($response->getContent())->toBe('ok');
     });
@@ -282,9 +284,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('checks pivot is_active property', function (): void {
@@ -326,9 +328,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $response = $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $response = $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
 
         expect($response->getContent())->toBe('ok');
     });
@@ -372,9 +374,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('checks pivot activated_at property', function (): void {
@@ -416,9 +418,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $response = $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $response = $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
 
         expect($response->getContent())->toBe('ok');
     });
@@ -462,9 +464,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('gets tenant from tenant property', function (): void {
@@ -484,9 +486,9 @@ describe('EnsureModuleActive middleware', function (): void {
             public function __construct(public object $tenant) {}
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $response = $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $response = $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
 
         expect($response->getContent())->toBe('ok');
     });
@@ -503,7 +505,7 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $user = new class ($tenant)
+        $user = new readonly class ($tenant)
         {
             public function __construct(private object $tenantObj) {}
 
@@ -513,9 +515,9 @@ describe('EnsureModuleActive middleware', function (): void {
             }
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $response = $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $response = $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
 
         expect($response->getContent())->toBe('ok');
     });
@@ -531,9 +533,9 @@ describe('EnsureModuleActive middleware', function (): void {
             public function __construct(public object $tenant) {}
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('handles non-iterable modules return value', function (): void {
@@ -553,9 +555,9 @@ describe('EnsureModuleActive middleware', function (): void {
             public function __construct(public object $tenant) {}
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('handles module without identifier', function (): void {
@@ -582,9 +584,9 @@ describe('EnsureModuleActive middleware', function (): void {
             public function __construct(public object $tenant) {}
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('handles non-object module in modules array', function (): void {
@@ -604,9 +606,9 @@ describe('EnsureModuleActive middleware', function (): void {
             public function __construct(public object $tenant) {}
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
     })->throws(HttpException::class);
 
     it('handles non-object in isModuleActivated', function (): void {
@@ -636,9 +638,9 @@ describe('EnsureModuleActive middleware', function (): void {
             public function __construct(public object $tenant) {}
         };
 
-        $request->setUserResolver(fn () => $user);
+        $request->setUserResolver(fn (): object => $user);
 
-        $response = $middleware->handle($request, fn () => response('ok'), 'hunter/analytics');
+        $response = $middleware->handle($request, fn (): ResponseFactory|Response => response('ok'), 'hunter/analytics');
 
         expect($response->getContent())->toBe('ok');
     });

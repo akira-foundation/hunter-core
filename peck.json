@@ -1,11 +1,7 @@
 {
     "preset": "laravel",
     "ignore": {
-        "words": [
-            "php",
-            "nav",
-            "href"
-        ],
+        "words": ["php", "nav", "href", "crm", "lucide"],
         "paths": []
     }
 }

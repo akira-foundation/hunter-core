@@ -10,7 +10,7 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 abstract class ModuleServiceProvider extends PackageServiceProvider implements ModuleManifest, ModuleNavigation
 {
-    protected ?Module $module = null;
+    protected Module $module;
 
     abstract public function configureModule(Module $module): void;
 
@@ -30,45 +30,48 @@ abstract class ModuleServiceProvider extends PackageServiceProvider implements M
 
     final public function identifier(): string
     {
-        return $this->module?->identifier ?? '';
+        return $this->module->identifier;
     }
 
     final public function name(): string
     {
-        return $this->module?->name ?? '';
+        return $this->module->name;
     }
 
     final public function description(): string
     {
-        return $this->module?->description ?? '';
+        return $this->module->description;
     }
 
     final public function version(): string
     {
-        return $this->module?->version ?? '1.0.0';
+        return $this->module->version;
     }
 
     final public function author(): ?array
     {
-        return $this->module?->author;
+        return $this->module->author;
     }
 
     final public function requiredPlatformVersion(): ?string
     {
-        return $this->module?->requiredPlatformVersion;
+        return $this->module->requiredPlatformVersion;
     }
 
+    /**
+     * @return array<string, string>
+     */
     final public function dependencies(): array
     {
-        return $this->module?->dependencies ?? [];
+        return $this->module->dependencies;
     }
 
     final public function navigation(): array
     {
-        return $this->module?->navigation ?? [];
+        return $this->module->navigation;
     }
 
-    final public function getModule(): ?Module
+    final public function getModule(): Module
     {
         return $this->module;
     }

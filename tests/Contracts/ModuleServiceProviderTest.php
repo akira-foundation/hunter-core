@@ -2,42 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Tests\Contracts;
-
-use Hunter\Core\Contracts\ModuleServiceProvider;
 use Hunter\Core\Module\Module;
 use Hunter\Core\Module\ModuleRegistry;
 use Hunter\Core\Navigation\NavItem;
-
-final class ModuleServiceProviderTest extends ModuleServiceProvider
-{
-    public function configureModule(Module $module): void
-    {
-        $module
-            ->identifier('test/module')
-            ->name('test-module')
-            ->description('Test module for testing')
-            ->version('1.2.3')
-            ->navigation([
-                new NavItem('Test', '/test', order: 1),
-            ])
-            ->author('Test Author', 'test@example.com', 'https://example.com')
-            ->requiredPlatformVersion('2.0.0')
-            ->dependencies(['hunter/core' => '^1.0']);
-    }
-}
-
-final class MinimalModuleProvider extends ModuleServiceProvider
-{
-    public function configureModule(Module $module): void
-    {
-        $module->name('minimal');
-    }
-}
+use Hunter\Core\Tests\Fixtures\MinimalModuleServiceProvider;
+use Hunter\Core\Tests\Fixtures\TestModuleServiceProvider;
 
 describe('ModuleServiceProvider', function (): void {
     it('configures module via fluent builder', function (): void {
-        $provider = new ModuleServiceProviderTest(app());
+        $provider = new TestModuleServiceProvider(app());
         $provider->register();
 
         expect($provider->identifier())->toBe('test/module')
@@ -47,7 +20,7 @@ describe('ModuleServiceProvider', function (): void {
     });
 
     it('provides navigation from module', function (): void {
-        $provider = new ModuleServiceProviderTest(app());
+        $provider = new TestModuleServiceProvider(app());
         $provider->register();
 
         $navigation = $provider->navigation();
@@ -58,7 +31,7 @@ describe('ModuleServiceProvider', function (): void {
     });
 
     it('provides author from module', function (): void {
-        $provider = new ModuleServiceProviderTest(app());
+        $provider = new TestModuleServiceProvider(app());
         $provider->register();
 
         $author = $provider->author();
@@ -71,21 +44,21 @@ describe('ModuleServiceProvider', function (): void {
     });
 
     it('provides required platform version from module', function (): void {
-        $provider = new ModuleServiceProviderTest(app());
+        $provider = new TestModuleServiceProvider(app());
         $provider->register();
 
         expect($provider->requiredPlatformVersion())->toBe('2.0.0');
     });
 
     it('provides dependencies from module', function (): void {
-        $provider = new ModuleServiceProviderTest(app());
+        $provider = new TestModuleServiceProvider(app());
         $provider->register();
 
         expect($provider->dependencies())->toBe(['hunter/core' => '^1.0']);
     });
 
     it('provides access to underlying module', function (): void {
-        $provider = new ModuleServiceProviderTest(app());
+        $provider = new TestModuleServiceProvider(app());
         $provider->register();
 
         $module = $provider->getModule();
@@ -95,7 +68,7 @@ describe('ModuleServiceProvider', function (): void {
     });
 
     it('returns defaults when module not configured', function (): void {
-        $provider = new MinimalModuleProvider(app());
+        $provider = new MinimalModuleServiceProvider(app());
         $provider->register();
 
         expect($provider->identifier())->toBe('')
@@ -112,7 +85,7 @@ describe('ModuleServiceProvider', function (): void {
         $registry = app(ModuleRegistry::class);
         $registry->clear();
 
-        $provider = new ModuleServiceProviderTest(app());
+        $provider = new TestModuleServiceProvider(app());
         $provider->register();
         $provider->boot();
 
@@ -124,7 +97,7 @@ describe('ModuleServiceProvider', function (): void {
         $app = app();
         $app->offsetUnset('hunter.modules');
 
-        $provider = new ModuleServiceProviderTest($app);
+        $provider = new TestModuleServiceProvider($app);
         $provider->register();
         $provider->boot();
 

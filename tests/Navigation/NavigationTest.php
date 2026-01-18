@@ -6,11 +6,9 @@ use Hunter\Core\Navigation\NavGroup;
 use Hunter\Core\Navigation\NavItem;
 
 describe('NavItem', function (): void {
-    it('can be created with required parameters', function (): void {
-        $item = new NavItem(
-            title: 'Dashboard',
-            href: '/dashboard',
-        );
+    it('can be created with make()', function (): void {
+        $item = NavItem::make('Dashboard')
+            ->href('/dashboard');
 
         expect($item->title)->toBe('Dashboard')
             ->and($item->href)->toBe('/dashboard')
@@ -20,15 +18,14 @@ describe('NavItem', function (): void {
             ->and($item->external)->toBeFalse();
     });
 
-    it('can be created with all parameters', function (): void {
-        $item = new NavItem(
-            title: 'Analytics',
-            href: '/analytics',
-            icon: 'chart-bar',
-            order: 10,
-            badge: 'New',
-            external: true,
-        );
+    it('can be created with all fluent methods', function (): void {
+        $item = NavItem::make()
+            ->title('Analytics')
+            ->href('/analytics')
+            ->icon('chart-bar')
+            ->order(10)
+            ->badge('New')
+            ->external();
 
         expect($item->title)->toBe('Analytics')
             ->and($item->href)->toBe('/analytics')
@@ -38,13 +35,29 @@ describe('NavItem', function (): void {
             ->and($item->external)->toBeTrue();
     });
 
+    it('has url() as alias for href()', function (): void {
+        $item = NavItem::make('Test')->url('/test-url');
+
+        expect($item->href)->toBe('/test-url');
+    });
+
+    it('has route() as alias for href()', function (): void {
+        $item = NavItem::make('Test')->route('dashboard.index');
+
+        expect($item->href)->toBe('dashboard.index');
+    });
+
+    it('has openInNewTab() as alias for external()', function (): void {
+        $item = NavItem::make('Test')->href('/test')->openInNewTab();
+
+        expect($item->external)->toBeTrue();
+    });
+
     it('can be converted to array', function (): void {
-        $item = new NavItem(
-            title: 'Settings',
-            href: '/settings',
-            icon: 'cog',
-            order: 5,
-        );
+        $item = NavItem::make('Settings')
+            ->href('/settings')
+            ->icon('cog')
+            ->order(5);
 
         $array = $item->toArray();
 
@@ -60,8 +73,8 @@ describe('NavItem', function (): void {
 });
 
 describe('NavGroup', function (): void {
-    it('can be created with required parameters', function (): void {
-        $group = new NavGroup(title: 'Admin');
+    it('can be created with make()', function (): void {
+        $group = NavGroup::make('Admin');
 
         expect($group->title)->toBe('Admin')
             ->and($group->items)->toBe([])
@@ -71,38 +84,56 @@ describe('NavGroup', function (): void {
             ->and($group->collapsed)->toBeFalse();
     });
 
-    it('can add items with withItem', function (): void {
-        $group = new NavGroup(title: 'Admin');
-        $item  = new NavItem(title: 'Users', href: '/users');
+    it('can be created with all fluent methods', function (): void {
+        $group = NavGroup::make()
+            ->title('Settings')
+            ->icon('cog')
+            ->order(50)
+            ->collapsible()
+            ->collapsed();
 
-        $newGroup = $group->withItem($item);
-
-        expect($group->items)->toHaveCount(0)
-            ->and($newGroup->items)->toHaveCount(1)
-            ->and($newGroup->items[0])->toBe($item);
+        expect($group->title)->toBe('Settings')
+            ->and($group->icon)->toBe('cog')
+            ->and($group->order)->toBe(50)
+            ->and($group->collapsible)->toBeTrue()
+            ->and($group->collapsed)->toBeTrue();
     });
 
-    it('can add multiple items with withItems', function (): void {
-        $group = new NavGroup(title: 'Admin');
+    it('can add single item with item()', function (): void {
+        $item = NavItem::make('Users')->href('/users');
+
+        $group = NavGroup::make('Admin')->item($item);
+
+        expect($group->items)->toHaveCount(1)
+            ->and($group->items[0])->toBe($item);
+    });
+
+    it('can add multiple items with items()', function (): void {
         $items = [
-            new NavItem(title: 'Users', href: '/users'),
-            new NavItem(title: 'Roles', href: '/roles'),
+            NavItem::make('Users')->href('/users'),
+            NavItem::make('Roles')->href('/roles'),
         ];
 
-        $newGroup = $group->withItems($items);
+        $group = NavGroup::make('Admin')->items($items);
 
-        expect($newGroup->items)->toHaveCount(2);
+        expect($group->items)->toHaveCount(2);
+    });
+
+    it('can chain item() calls', function (): void {
+        $group = NavGroup::make('Admin')
+            ->item(NavItem::make('Users')->href('/users'))
+            ->item(NavItem::make('Roles')->href('/roles'));
+
+        expect($group->items)->toHaveCount(2);
     });
 
     it('returns items sorted by order', function (): void {
-        $group = new NavGroup(
-            title: 'Admin',
-            items: [
-                new NavItem(title: 'Third', href: '/third', order: 30),
-                new NavItem(title: 'First', href: '/first', order: 10),
-                new NavItem(title: 'Second', href: '/second', order: 20),
-            ],
-        );
+        $group = NavGroup::make('Admin')
+            ->items([
+                NavItem::make('Third')->href('/third')->order(30),
+                NavItem::make('First')->href('/first')->order(10),
+                NavItem::make('Second')->href('/second')->order(20),
+            ]);
 
         $sorted = $group->sortedItems();
 
@@ -112,14 +143,12 @@ describe('NavGroup', function (): void {
     });
 
     it('can be converted to array', function (): void {
-        $group = new NavGroup(
-            title: 'Admin',
-            items: [
-                new NavItem(title: 'Users', href: '/users', order: 1),
-            ],
-            icon: 'shield',
-            order: 5,
-        );
+        $group = NavGroup::make('Admin')
+            ->icon('shield')
+            ->order(5)
+            ->items([
+                NavItem::make('Users')->href('/users')->order(1),
+            ]);
 
         $array = $group->toArray();
 
@@ -130,5 +159,11 @@ describe('NavGroup', function (): void {
             ->and($array['collapsed'])->toBeFalse()
             ->and($array['items'])->toHaveCount(1)
             ->and($array['items'][0]['title'])->toBe('Users');
+    });
+
+    it('can disable collapsible', function (): void {
+        $group = NavGroup::make('Admin')->collapsible(false);
+
+        expect($group->collapsible)->toBeFalse();
     });
 });

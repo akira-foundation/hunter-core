@@ -22,7 +22,7 @@ interface ModuleManifest
     public function requiredPlatformVersion(): ?string;
 
     /**
-     * @return array<int, string>
+     * @return array<string, string>
      */
     public function dependencies(): array;
 }

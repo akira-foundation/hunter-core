@@ -2,45 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Tests\Module;
-
-use Hunter\Core\Contracts\ModuleServiceProvider;
-use Hunter\Core\Module\Module;
 use Hunter\Core\Module\ModuleRegistry;
 use Hunter\Core\Navigation\NavGroup;
 use Hunter\Core\Navigation\NavItem;
-
-final class FakeAnalyticsModuleProvider extends ModuleServiceProvider
-{
-    public function configureModule(Module $module): void
-    {
-        $module
-            ->identifier('hunter/analytics')
-            ->name('hunter-analytics')
-            ->description('Analytics and reporting module')
-            ->version('1.0.0')
-            ->navigation([
-                new NavItem(title: 'Analytics', href: '/analytics', order: 10),
-                new NavGroup(title: 'Reports', order: 20),
-            ]);
-    }
-}
-
-final class FakeCrmModuleProvider extends ModuleServiceProvider
-{
-    public function configureModule(Module $module): void
-    {
-        $module
-            ->identifier('hunter/crm')
-            ->name('hunter-crm')
-            ->description('Customer relationship management')
-            ->version('2.0.0')
-            ->navigation([
-                new NavItem(title: 'Contacts', href: '/contacts', order: 5),
-                new NavGroup(title: 'Sales', order: 15),
-            ]);
-    }
-}
+use Hunter\Core\Tests\Fixtures\FakeAnalyticsModuleProvider;
+use Hunter\Core\Tests\Fixtures\FakeCrmModuleProvider;
 
 function createAnalyticsProvider(): FakeAnalyticsModuleProvider
 {

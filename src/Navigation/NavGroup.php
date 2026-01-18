@@ -4,50 +4,107 @@ declare(strict_types=1);
 
 namespace Hunter\Core\Navigation;
 
-final readonly class NavGroup
+final class NavGroup
 {
-    /**
-     * @param string              $title       Display title for the navigation group
-     * @param array<int, NavItem> $items       Navigation items within this group
-     * @param string|null         $icon        Icon identifier (e.g., Lucide icon name)
-     * @param int                 $order       Sort order (lower values appear first)
-     * @param bool                $collapsible Whether the group can be collapsed
-     * @param bool                $collapsed   Default collapsed state
-     */
-    public function __construct(
-        public string $title,
-        public array $items = [],
-        public ?string $icon = null,
-        public int $order = 0,
-        public bool $collapsible = true,
-        public bool $collapsed = false,
-    ) {}
+    public string $title {
+        get => $this->titleValue;
+    }
 
-    public function withItem(NavItem $item): self
+    /** @var array<int, NavItem> */
+    public array $items {
+        get => $this->itemsValue;
+    }
+
+    public ?string $icon {
+        get => $this->iconValue;
+    }
+
+    public int $order {
+        get => $this->orderValue;
+    }
+
+    public bool $collapsible {
+        get => $this->collapsibleValue;
+    }
+
+    public bool $collapsed {
+        get => $this->collapsedValue;
+    }
+
+    private string $titleValue = '';
+
+    /** @var array<int, NavItem> */
+    private array $itemsValue = [];
+
+    private ?string $iconValue = null;
+
+    private int $orderValue = 0;
+
+    private bool $collapsibleValue = true;
+
+    private bool $collapsedValue = false;
+
+    public static function make(?string $title = null): self
     {
-        return new self(
-            title: $this->title,
-            items: [...$this->items, $item],
-            icon: $this->icon,
-            order: $this->order,
-            collapsible: $this->collapsible,
-            collapsed: $this->collapsed,
-        );
+        $instance = new self();
+
+        if ($title !== null) {
+            $instance->titleValue = $title;
+        }
+
+        return $instance;
+    }
+
+    public function title(string $title): self
+    {
+        $this->titleValue = $title;
+
+        return $this;
+    }
+
+    public function icon(?string $icon): self
+    {
+        $this->iconValue = $icon;
+
+        return $this;
+    }
+
+    public function order(int $order): self
+    {
+        $this->orderValue = $order;
+
+        return $this;
+    }
+
+    public function collapsible(bool $collapsible = true): self
+    {
+        $this->collapsibleValue = $collapsible;
+
+        return $this;
+    }
+
+    public function collapsed(bool $collapsed = true): self
+    {
+        $this->collapsedValue = $collapsed;
+
+        return $this;
     }
 
     /**
      * @param array<int, NavItem> $items
      */
-    public function withItems(array $items): self
+    public function items(array $items): self
     {
-        return new self(
-            title: $this->title,
-            items: [...$this->items, ...$items],
-            icon: $this->icon,
-            order: $this->order,
-            collapsible: $this->collapsible,
-            collapsed: $this->collapsed,
-        );
+        $this->itemsValue = $items;
+
+        return $this;
+    }
+
+    public function item(NavItem $item): self
+    {
+        $this->itemsValue[] = $item;
+
+        return $this;
     }
 
     /**
