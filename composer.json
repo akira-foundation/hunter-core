@@ -67,8 +67,7 @@
     "test:arch": "pest --filter=arch",
     "test:types": "phpstan",
     "test:type-coverage": [
-      "pest --type-coverage --min=100 --compact",
-      "pest --type-coverage --min=100"
+      "pest --type-coverage --min=100 --compact"
     ],
     "test:coverage": "pest --parallel --coverage --compact --exactly=100",
     "test:typos": "peck",
@@ -81,8 +80,7 @@
       "5": "@test:coverage",
       "6": "@test:type-coverage",
       "8": "@test:unit"
-    },
-    "test:unit": "pest --parallel --coverage --exactly=100.0"
+    }
   },
   "config": {
     "sort-packages": true,
