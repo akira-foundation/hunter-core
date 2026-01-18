@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Hunter\Core\Enums\ModuleLogAction;
+use Hunter\Core\Enums\ModuleLog;
 use Hunter\Core\Enums\ModuleLogStatus;
 use Hunter\Core\Enums\ModuleStatus;
 
@@ -53,34 +53,34 @@ describe('ModuleStatus', function (): void {
 
 describe('ModuleLogAction', function (): void {
     it('has all expected cases', function (): void {
-        expect(ModuleLogAction::cases())->toHaveCount(8)
-            ->and(ModuleLogAction::Install->value)->toBe('install')
-            ->and(ModuleLogAction::Update->value)->toBe('update')
-            ->and(ModuleLogAction::Remove->value)->toBe('remove')
-            ->and(ModuleLogAction::Activate->value)->toBe('activate')
-            ->and(ModuleLogAction::Deactivate->value)->toBe('deactivate');
+        expect(ModuleLog::cases())->toHaveCount(8)
+            ->and(ModuleLog::Install->value)->toBe('install')
+            ->and(ModuleLog::Update->value)->toBe('update')
+            ->and(ModuleLog::Remove->value)->toBe('remove')
+            ->and(ModuleLog::Activate->value)->toBe('activate')
+            ->and(ModuleLog::Deactivate->value)->toBe('deactivate');
     });
 
     it('returns correct labels for all cases', function (): void {
-        expect(ModuleLogAction::Install->label())->toBe('Install')
-            ->and(ModuleLogAction::Update->label())->toBe('Update')
-            ->and(ModuleLogAction::Remove->label())->toBe('Remove')
-            ->and(ModuleLogAction::Publish->label())->toBe('Publish')
-            ->and(ModuleLogAction::Migrate->label())->toBe('Migrate')
-            ->and(ModuleLogAction::Build->label())->toBe('Build')
-            ->and(ModuleLogAction::Activate->label())->toBe('Activate')
-            ->and(ModuleLogAction::Deactivate->label())->toBe('Deactivate');
+        expect(ModuleLog::Install->label())->toBe('Install')
+            ->and(ModuleLog::Update->label())->toBe('Update')
+            ->and(ModuleLog::Remove->label())->toBe('Remove')
+            ->and(ModuleLog::Publish->label())->toBe('Publish')
+            ->and(ModuleLog::Migrate->label())->toBe('Migrate')
+            ->and(ModuleLog::Build->label())->toBe('Build')
+            ->and(ModuleLog::Activate->label())->toBe('Activate')
+            ->and(ModuleLog::Deactivate->label())->toBe('Deactivate');
     });
 
     it('returns correct verbs for all cases', function (): void {
-        expect(ModuleLogAction::Install->verb())->toBe('installed')
-            ->and(ModuleLogAction::Update->verb())->toBe('updated')
-            ->and(ModuleLogAction::Remove->verb())->toBe('removed')
-            ->and(ModuleLogAction::Publish->verb())->toBe('published')
-            ->and(ModuleLogAction::Migrate->verb())->toBe('migrated')
-            ->and(ModuleLogAction::Build->verb())->toBe('built')
-            ->and(ModuleLogAction::Activate->verb())->toBe('activated')
-            ->and(ModuleLogAction::Deactivate->verb())->toBe('deactivated');
+        expect(ModuleLog::Install->verb())->toBe('installed')
+            ->and(ModuleLog::Update->verb())->toBe('updated')
+            ->and(ModuleLog::Remove->verb())->toBe('removed')
+            ->and(ModuleLog::Publish->verb())->toBe('published')
+            ->and(ModuleLog::Migrate->verb())->toBe('migrated')
+            ->and(ModuleLog::Build->verb())->toBe('built')
+            ->and(ModuleLog::Activate->verb())->toBe('activated')
+            ->and(ModuleLog::Deactivate->verb())->toBe('deactivated');
     });
 });
 

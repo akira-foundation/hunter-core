@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Hunter\Core\Enums;
 
-enum ModuleLogAction: string
+enum ModuleLog: string
 {
     case Install    = 'install';
     case Update     = 'update';
