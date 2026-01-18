@@ -10,7 +10,7 @@ This guide covers installing Hunter Core in your Laravel application.
 ## Installation via Composer
 
 ```bash
-composer require hunter/core
+composer require akira/hunter-core
 ```
 
 The package will auto-register its service provider via Laravel's package discovery.

@@ -1,5 +1,5 @@
 {
-  "name": "hunter/core",
+  "name": "akira/hunter-core",
   "description": "Core foundation package providing shared utilities, base components, and essential services for Hunter, the Cape Verdean social network platform",
   "keywords": [
     "Hunter",
