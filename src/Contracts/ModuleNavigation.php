@@ -10,8 +10,6 @@ use Hunter\Core\Navigation\NavItem;
 interface ModuleNavigation
 {
     /**
-     * Get the navigation items provided by this module.
-     *
      * @return array<int, NavItem|NavGroup>
      */
     public function navigation(): array;
