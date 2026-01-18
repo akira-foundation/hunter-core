@@ -4,7 +4,8 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/hunter/core/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/hunter/core/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/hunter/core.svg?style=flat-square)](https://packagist.org/packages/hunter/core)
 
-Hunter Core is a modular architecture foundation for Laravel applications. It provides the base infrastructure for building extensible, tenant-aware applications where functionality is delivered through installable modules.
+Hunter Core is a modular architecture foundation for Laravel applications. It provides the base infrastructure for
+building extensible, tenant-aware applications where functionality is delivered through installable modules.
 
 ## Features
 
@@ -25,7 +26,7 @@ Hunter Core is a modular architecture foundation for Laravel applications. It pr
 Install the package via Composer:
 
 ```bash
-composer require hunter/core
+composer require akira/hunter-module
 ```
 
 The package auto-registers its service provider via Laravel's package discovery.
@@ -82,7 +83,7 @@ final class AnalyticsServiceProvider extends ModuleServiceProvider
 ## Module Configuration API
 
 | Method                             | Description                                   |
-| ---------------------------------- | --------------------------------------------- |
+|------------------------------------|-----------------------------------------------|
 | `identifier(string)`               | Unique module identifier (vendor/name format) |
 | `name(string)`                     | Package name for config, views, routes        |
 | `description(string)`              | Human-readable description                    |
