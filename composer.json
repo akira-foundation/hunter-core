@@ -79,7 +79,6 @@
       "4": "@test:types",
       "5": "@test:coverage",
       "6": "@test:type-coverage",
-      "8": "@test:unit"
     }
   },
   "config": {
