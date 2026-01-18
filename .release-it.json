@@ -2,7 +2,7 @@
   "git": {
     "commitMessage": "chore(release): ${version}",
     "requireCleanWorkingDir": false,
-    "requireBranch": "main",
+    "requireBranch": "1.x",
     "requireUpstream": true,
     "requireCommits": false,
     "addUntrackedFiles": false,
@@ -40,73 +40,15 @@
     "timeout": 10
   },
   "hooks": {
-    "before:init": [],
-    "after:bump": [
-      "composer install",
-      "npm install"
-    ],
-    "after:release": []
+    "before:bump": [
+      "composer test"
+    ]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": {
-        "name": "conventionalcommits",
-        "types": [
-          {
-            "type": "feat",
-            "section": "Features"
-          },
-          {
-            "type": "fix",
-            "section": "Bug Fixes"
-          },
-          {
-            "type": "perf",
-            "section": "Performance Improvements"
-          },
-          {
-            "type": "revert",
-            "section": "Reverts"
-          },
-          {
-            "type": "docs",
-            "section": "Documentation",
-            "hidden": false
-          },
-          {
-            "type": "style",
-            "section": "Styles",
-            "hidden": true
-          },
-          {
-            "type": "chore",
-            "section": "Miscellaneous Chores",
-            "hidden": true
-          },
-          {
-            "type": "refactor",
-            "section": "Code Refactoring",
-            "hidden": false
-          },
-          {
-            "type": "test",
-            "section": "Tests",
-            "hidden": true
-          },
-          {
-            "type": "build",
-            "section": "Build System",
-            "hidden": true
-          },
-          {
-            "type": "ci",
-            "section": "Continuous Integration",
-            "hidden": true
-          }
-        ]
-      },
+      "preset": "angular",
       "infile": "CHANGELOG.md",
-      "header": "# Changelog",
+      "header": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n",
       "gitRawCommitsOpts": {
         "path": "."
       }

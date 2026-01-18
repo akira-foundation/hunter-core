@@ -63,18 +63,23 @@
         "test:refactor": "rector --dry-run",
         "test:arch": "pest --filter=arch",
         "test:types": "phpstan",
-        "test:type-coverage": "pest --type-coverage --min=100 --compact",
+        "test:type-coverage": [
+            "pest --type-coverage --min=100 --compact",
+            "pest --type-coverage --min=100"
+        ],
         "test:coverage": "pest --parallel --coverage --compact --exactly=100",
         "test:typos": "peck",
-        "test": [
-            "@test:lint",
-            "@test:refactor",
-            "@test:typos",
-            "@test:arch",
-            "@test:types",
-            "@test:coverage",
-            "@test:type-coverage"
-        ]
+        "test": {
+            "0": "@test:lint",
+            "1": "@test:refactor",
+            "2": "@test:typos",
+            "3": "@test:arch",
+            "4": "@test:types",
+            "5": "@test:coverage",
+            "6": "@test:type-coverage",
+            "8": "@test:unit"
+        },
+        "test:unit": "pest --parallel --coverage --exactly=100.0"
     },
     "config": {
         "sort-packages": true,

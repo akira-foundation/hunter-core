@@ -1,0 +1,19 @@
+{
+    "name": "hunter-core",
+    "module": "index.ts",
+    "type": "module",
+    "private": true,
+    "devDependencies": {
+        "@commitlint/cli": "^20.3.1",
+        "@commitlint/config-conventional": "^20.3.1",
+        "@release-it/conventional-changelog": "^10.0.4",
+        "@types/bun": "latest",
+        "release-it": "^19.2.3"
+    },
+    "peerDependencies": {
+        "typescript": "^5"
+    },
+    "scripts": {
+        "release": "release-it"
+    }
+}
