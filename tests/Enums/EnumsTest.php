@@ -17,9 +17,23 @@ describe('ModuleStatus', function (): void {
             ->and(ModuleStatus::Removing->value)->toBe('removing');
     });
 
-    it('returns correct labels', function (): void {
+    it('returns correct labels for all cases', function (): void {
         expect(ModuleStatus::Pending->label())->toBe('Pending')
-            ->and(ModuleStatus::Installed->label())->toBe('Installed');
+            ->and(ModuleStatus::Installing->label())->toBe('Installing')
+            ->and(ModuleStatus::Installed->label())->toBe('Installed')
+            ->and(ModuleStatus::Failed->label())->toBe('Failed')
+            ->and(ModuleStatus::Updating->label())->toBe('Updating')
+            ->and(ModuleStatus::Removing->label())->toBe('Removing');
+    });
+
+    it('identifies non-operational statuses', function (): void {
+        expect(ModuleStatus::Failed->isOperational())->toBeFalse()
+            ->and(ModuleStatus::Updating->isOperational())->toBeFalse()
+            ->and(ModuleStatus::Removing->isOperational())->toBeFalse();
+    });
+
+    it('identifies non-transitional statuses', function (): void {
+        expect(ModuleStatus::Failed->isTransitional())->toBeFalse();
     });
 
     it('identifies operational status', function (): void {
@@ -47,14 +61,26 @@ describe('ModuleLogAction', function (): void {
             ->and(ModuleLogAction::Deactivate->value)->toBe('deactivate');
     });
 
-    it('returns correct labels', function (): void {
+    it('returns correct labels for all cases', function (): void {
         expect(ModuleLogAction::Install->label())->toBe('Install')
-            ->and(ModuleLogAction::Activate->label())->toBe('Activate');
+            ->and(ModuleLogAction::Update->label())->toBe('Update')
+            ->and(ModuleLogAction::Remove->label())->toBe('Remove')
+            ->and(ModuleLogAction::Publish->label())->toBe('Publish')
+            ->and(ModuleLogAction::Migrate->label())->toBe('Migrate')
+            ->and(ModuleLogAction::Build->label())->toBe('Build')
+            ->and(ModuleLogAction::Activate->label())->toBe('Activate')
+            ->and(ModuleLogAction::Deactivate->label())->toBe('Deactivate');
     });
 
-    it('returns correct verbs', function (): void {
+    it('returns correct verbs for all cases', function (): void {
         expect(ModuleLogAction::Install->verb())->toBe('installed')
-            ->and(ModuleLogAction::Activate->verb())->toBe('activated');
+            ->and(ModuleLogAction::Update->verb())->toBe('updated')
+            ->and(ModuleLogAction::Remove->verb())->toBe('removed')
+            ->and(ModuleLogAction::Publish->verb())->toBe('published')
+            ->and(ModuleLogAction::Migrate->verb())->toBe('migrated')
+            ->and(ModuleLogAction::Build->verb())->toBe('built')
+            ->and(ModuleLogAction::Activate->verb())->toBe('activated')
+            ->and(ModuleLogAction::Deactivate->verb())->toBe('deactivated');
     });
 });
 
@@ -66,9 +92,10 @@ describe('ModuleLogStatus', function (): void {
             ->and(ModuleLogStatus::Failed->value)->toBe('failed');
     });
 
-    it('returns correct labels', function (): void {
+    it('returns correct labels for all cases', function (): void {
         expect(ModuleLogStatus::Started->label())->toBe('Started')
-            ->and(ModuleLogStatus::Completed->label())->toBe('Completed');
+            ->and(ModuleLogStatus::Completed->label())->toBe('Completed')
+            ->and(ModuleLogStatus::Failed->label())->toBe('Failed');
     });
 
     it('identifies terminal statuses', function (): void {
