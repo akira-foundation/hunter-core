@@ -78,7 +78,7 @@
       "3": "@test:arch",
       "4": "@test:types",
       "5": "@test:coverage",
-      "6": "@test:type-coverage",
+      "6": "@test:type-coverage"
     }
   },
   "config": {
