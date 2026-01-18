@@ -4,11 +4,62 @@ declare(strict_types=1);
 
 namespace Hunter\Core\Module;
 
+use Hunter\Core\Navigation\NavGroup;
+use Hunter\Core\Navigation\NavItem;
 use Spatie\LaravelPackageTools\Package;
 
 final class Module
 {
-    private string $name = '';
+    public string $identifier = '' {
+        get {
+            return $this->identifier;
+        }
+    }
+
+    public string $name = '' {
+        get {
+            return $this->name;
+        }
+    }
+
+    public string $description = '' {
+        get {
+            return $this->description;
+        }
+    }
+
+    public string $version = '1.0.0' {
+        get {
+            return $this->version;
+        }
+    }
+
+    /** @var array<int, NavItem|NavGroup> */
+    public array $navigation = [] {
+        get {
+            return $this->navigation;
+        }
+    }
+
+    /** @var array{name: string, email: string|null, url: string|null}|null */
+    public ?array $author = null {
+        get {
+            return $this->author;
+        }
+    }
+
+    public ?string $requiredPlatformVersion = null {
+        get {
+            return $this->requiredPlatformVersion;
+        }
+    }
+
+    /** @var array<string, string> */
+    public array $dependencies = [] {
+        get {
+            return $this->dependencies;
+        }
+    }
 
     private bool $hasConfig = false;
 
@@ -28,9 +79,30 @@ final class Module
         private readonly Package $package,
     ) {}
 
+    public function identifier(string $identifier): self
+    {
+        $this->identifier = $identifier;
+
+        return $this;
+    }
+
     public function name(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function description(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function version(string $version): self
+    {
+        $this->version = $version;
 
         return $this;
     }
@@ -132,8 +204,41 @@ final class Module
         }
     }
 
-    public function getName(): string
+    /**
+     * @param array<int, NavItem|NavGroup> $items
+     */
+    public function navigation(array $items): self
     {
-        return $this->name;
+        $this->navigation = $items;
+
+        return $this;
+    }
+
+    public function author(string $name, ?string $email = null, ?string $url = null): self
+    {
+        $this->author = [
+            'name'  => $name,
+            'email' => $email,
+            'url'   => $url,
+        ];
+
+        return $this;
+    }
+
+    public function requiredPlatformVersion(string $version): self
+    {
+        $this->requiredPlatformVersion = $version;
+
+        return $this;
+    }
+
+    /**
+     * @param array<string, string> $dependencies
+     */
+    public function dependencies(array $dependencies): self
+    {
+        $this->dependencies = $dependencies;
+
+        return $this;
     }
 }

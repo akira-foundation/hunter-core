@@ -10,15 +10,17 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 abstract class ModuleServiceProvider extends PackageServiceProvider implements ModuleManifest, ModuleNavigation
 {
+    protected ?Module $module = null;
+
     abstract public function configureModule(Module $module): void;
 
     final public function configurePackage(Package $package): void
     {
-        $module = new Module($package);
+        $this->module = new Module($package);
 
-        $this->configureModule($module);
+        $this->configureModule($this->module);
 
-        $module->apply();
+        $this->module->apply();
     }
 
     final public function bootingPackage(): void
@@ -26,27 +28,52 @@ abstract class ModuleServiceProvider extends PackageServiceProvider implements M
         $this->registerWithModuleRegistry();
     }
 
-    final public function navigation(): array
+    final public function identifier(): string
     {
-        return [];
+        return $this->module?->identifier ?? '';
+    }
+
+    final public function name(): string
+    {
+        return $this->module?->name ?? '';
+    }
+
+    final public function description(): string
+    {
+        return $this->module?->description ?? '';
+    }
+
+    final public function version(): string
+    {
+        return $this->module?->version ?? '1.0.0';
     }
 
     final public function author(): ?array
     {
-        return null;
+        return $this->module?->author;
     }
 
     final public function requiredPlatformVersion(): ?string
     {
-        return null;
+        return $this->module?->requiredPlatformVersion;
     }
 
     final public function dependencies(): array
     {
-        return [];
+        return $this->module?->dependencies ?? [];
     }
 
-    protected function registerWithModuleRegistry(): void
+    final public function navigation(): array
+    {
+        return $this->module?->navigation ?? [];
+    }
+
+    final public function getModule(): ?Module
+    {
+        return $this->module;
+    }
+
+    private function registerWithModuleRegistry(): void
     {
         if ($this->app->bound('hunter.modules')) {
             $this->app->make('hunter.modules')->register($this);
