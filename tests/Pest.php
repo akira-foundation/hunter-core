@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-use Core\Core\Tests\TestCase;
+use Hunter\Core\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

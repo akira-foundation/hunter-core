@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Core\Core\Commands\CoreCommand;
+use Hunter\Core\Commands\CoreCommand;
 
 use function Pest\Laravel\artisan;
 

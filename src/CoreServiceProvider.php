@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Core\Core;
+namespace Hunter\Core;
 
-use Core\Core\Commands\CoreCommand;
+use Hunter\Core\Commands\CoreCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

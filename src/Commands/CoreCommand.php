@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Core\Core\Commands;
+namespace Hunter\Core\Commands;
 
 use Illuminate\Console\Command;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Core\Core\Tests;
+namespace Hunter\Core\Tests;
 
 use Akira\Debugger\DebuggerServiceProvider;
-use Core\Core\CoreServiceProvider;
+use Hunter\Core\CoreServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Override;
@@ -18,7 +18,7 @@ abstract class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            static fn (string $modelName): string => 'Core\Core\Database\Factories\\' . class_basename($modelName) . 'Factory',
+            static fn (string $modelName): string => 'Hunter\Core\Database\Factories\\' . class_basename($modelName) . 'Factory',
         );
     }
 

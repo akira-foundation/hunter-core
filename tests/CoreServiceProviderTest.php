@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Core\Core\CoreServiceProvider;
+use Hunter\Core\CoreServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 
 it('registers the package correctly', function (): void {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Core\Core\Database\Factories;
+namespace Hunter\Core\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

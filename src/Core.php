@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Core\Core;
+namespace Hunter\Core;
 
 final class Core {}
