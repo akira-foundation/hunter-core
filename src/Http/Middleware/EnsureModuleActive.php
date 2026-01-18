@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Http\Middleware;
+namespace Hunter\Module\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Contracts;
+namespace Hunter\Module\Contracts;
 
-use Hunter\Core\Navigation\NavGroup;
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
 
 interface ModuleNavigation
 {

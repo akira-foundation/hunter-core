@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Hunter\Core\Module\Module;
-use Hunter\Core\Module\ModuleRegistry;
-use Hunter\Core\Navigation\NavItem;
-use Hunter\Core\Tests\Fixtures\MinimalModuleServiceProvider;
-use Hunter\Core\Tests\Fixtures\TestModuleServiceProvider;
+use Hunter\Module\Module\Module;
+use Hunter\Module\Module\ModuleRegistry;
+use Hunter\Module\Navigation\NavItem;
+use Hunter\Module\Tests\Fixtures\MinimalModuleServiceProvider;
+use Hunter\Module\Tests\Fixtures\TestModuleServiceProvider;
 
 describe('ModuleServiceProvider', function (): void {
     it('configures module via fluent builder', function (): void {

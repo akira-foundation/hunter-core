@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Navigation;
+namespace Hunter\Module\Navigation;
 
 final class NavGroup
 {

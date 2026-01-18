@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Contracts;
+namespace Hunter\Module\Contracts;
 
-use Hunter\Core\Module\Module;
+use Hunter\Module\Module\Module;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

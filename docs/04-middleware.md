@@ -11,7 +11,7 @@ The `EnsureModuleActive` middleware checks whether a specific module is active f
 ### Route Definition
 
 ```php
-use Hunter\Core\Http\Middleware\EnsureModuleActive;
+use Hunter\Module\Http\Middleware\EnsureModuleActive;
 
 // Single route
 Route::get('/analytics', AnalyticsController::class)
@@ -30,7 +30,7 @@ Route::middleware([EnsureModuleActive::class . ':hunter/crm'])
 ### Using Route Attributes
 
 ```php
-use Hunter\Core\Http\Middleware\EnsureModuleActive;
+use Hunter\Module\Http\Middleware\EnsureModuleActive;
 use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Middleware;
 
@@ -52,7 +52,7 @@ Register an alias in `bootstrap/app.php` for cleaner syntax:
 ```php
 ->withMiddleware(function (Middleware $middleware) {
     $middleware->alias([
-        'module' => \Hunter\Core\Http\Middleware\EnsureModuleActive::class,
+        'module' => \Hunter\Module\Http\Middleware\EnsureModuleActive::class,
     ]);
 })
 ```

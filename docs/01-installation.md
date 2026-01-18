@@ -24,7 +24,7 @@ If you have disabled auto-discovery, add the service provider to `bootstrap/prov
 
 return [
     // ...
-    Hunter\Core\CoreServiceProvider::class,
+    Hunter\Module\HunterModuleServiceProvider::class,
 ];
 ```
 
@@ -33,7 +33,7 @@ return [
 You can verify the installation by running the included Artisan command:
 
 ```bash
-php artisan hunter-core
+php artisan hunter:module
 ```
 
 ## Configuration
@@ -53,7 +53,7 @@ The module registry is automatically bound to the container as a singleton. You 
 $registry = app('hunter.modules');
 
 // Via class resolution
-$registry = app(\Hunter\Core\Module\ModuleRegistry::class);
+$registry = app(\Hunter\Module\Module\ModuleRegistry::class);
 
 // Via dependency injection
 public function __construct(

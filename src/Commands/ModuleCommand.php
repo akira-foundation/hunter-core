@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Commands;
+namespace Hunter\Module\Commands;
 
 use Illuminate\Console\Command;
 
-final class CoreCommand extends Command
+final class ModuleCommand extends Command
 {
-    public $signature = 'hunter-core';
+    public $signature = 'hunter:module';
 
-    public $description = 'My command';
+    public $description = 'Hunter module system command';
 
     public function handle(): int
     {

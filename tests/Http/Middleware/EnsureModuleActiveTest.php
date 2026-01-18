@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Hunter\Core\Http\Middleware\EnsureModuleActive;
+use Hunter\Module\Http\Middleware\EnsureModuleActive;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

@@ -29,7 +29,7 @@ new NavItem(
 ### Examples
 
 ```php
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Navigation\NavItem;
 
 // Simple item
 $dashboard = new NavItem('Dashboard', '/dashboard');
@@ -97,8 +97,8 @@ new NavGroup(
 ### Examples
 
 ```php
-use Hunter\Core\Navigation\NavGroup;
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
 
 // Group with items in constructor
 $reports = new NavGroup(

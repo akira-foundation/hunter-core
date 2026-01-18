@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Hunter\Core\Enums\ModuleLog;
-use Hunter\Core\Enums\ModuleLogStatus;
-use Hunter\Core\Enums\ModuleStatus;
+use Hunter\Module\Enums\ModuleLog;
+use Hunter\Module\Enums\ModuleLogStatus;
+use Hunter\Module\Enums\ModuleStatus;
 
 describe('ModuleStatus', function (): void {
     it('has all expected cases', function (): void {

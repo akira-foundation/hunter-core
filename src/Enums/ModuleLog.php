@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Enums;
+namespace Hunter\Module\Enums;
 
 enum ModuleLog: string
 {

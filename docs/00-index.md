@@ -32,10 +32,10 @@ extensible, tenant-aware applications where functionality is delivered through i
 
 namespace Hunter\Analytics;
 
-use Hunter\Core\Contracts\ModuleServiceProvider;
-use Hunter\Core\Module\Module;
-use Hunter\Core\Navigation\NavGroup;
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Contracts\ModuleServiceProvider;
+use Hunter\Module\Module\Module;
+use Hunter\Module\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
 
 final class AnalyticsServiceProvider extends ModuleServiceProvider
 {

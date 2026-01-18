@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Module;
+namespace Hunter\Module\Module;
 
-use Hunter\Core\Contracts\ModuleServiceProvider;
-use Hunter\Core\Navigation\NavGroup;
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Contracts\ModuleServiceProvider;
+use Hunter\Module\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
 
 use function count;
 

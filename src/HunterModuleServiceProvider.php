@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core;
+namespace Hunter\Module;
 
-use Hunter\Core\Commands\CoreCommand;
-use Hunter\Core\Http\Middleware\EnsureModuleActive;
-use Hunter\Core\Module\ModuleRegistry;
+use Hunter\Module\Commands\ModuleCommand;
+use Hunter\Module\Http\Middleware\EnsureModuleActive;
+use Hunter\Module\Module\ModuleRegistry;
 use Illuminate\Routing\Router;
 use Override;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-final class CoreServiceProvider extends PackageServiceProvider
+final class HunterModuleServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -21,7 +21,7 @@ final class CoreServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_hunter_core_table')
-            ->hasCommand(CoreCommand::class);
+            ->hasCommand(ModuleCommand::class);
     }
 
     #[Override]

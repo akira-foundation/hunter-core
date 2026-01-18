@@ -13,7 +13,7 @@ $registry = app('hunter.modules');
 ### Via Class Resolution
 
 ```php
-use Hunter\Core\Module\ModuleRegistry;
+use Hunter\Module\Module\ModuleRegistry;
 
 $registry = app(ModuleRegistry::class);
 ```
@@ -21,7 +21,7 @@ $registry = app(ModuleRegistry::class);
 ### Via Dependency Injection
 
 ```php
-use Hunter\Core\Module\ModuleRegistry;
+use Hunter\Module\Module\ModuleRegistry;
 
 final class NavigationController
 {
@@ -260,7 +260,7 @@ $commands = collect($registry->all())
 
 ## Service Provider Registration
 
-The registry is registered as a singleton in `CoreServiceProvider`:
+The registry is registered as a singleton in `HunterModuleServiceProvider`:
 
 ```php
 // Bound as singleton
@@ -298,7 +298,7 @@ This means:
 ## Testing with the Registry
 
 ```php
-use Hunter\Core\Module\ModuleRegistry;
+use Hunter\Module\Module\ModuleRegistry;
 
 beforeEach(function () {
     app(ModuleRegistry::class)->clear();

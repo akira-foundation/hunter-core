@@ -37,8 +37,8 @@ declare(strict_types=1);
 
 namespace Hunter\Analytics;
 
-use Hunter\Core\Contracts\ModuleServiceProvider;
-use Hunter\Core\Module\Module;
+use Hunter\Module\Contracts\ModuleServiceProvider;
+use Hunter\Module\Module\Module;
 
 final class AnalyticsServiceProvider extends ModuleServiceProvider
 {
@@ -153,8 +153,8 @@ $module->hasCommands([
 Modules can contribute navigation items to the platform:
 
 ```php
-use Hunter\Core\Navigation\NavGroup;
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
 
 $module->navigation([
     // Standalone item
@@ -191,10 +191,10 @@ namespace Hunter\Analytics;
 
 use Hunter\Analytics\Commands\GenerateReportCommand;
 use Hunter\Analytics\Commands\PruneEventsCommand;
-use Hunter\Core\Contracts\ModuleServiceProvider;
-use Hunter\Core\Module\Module;
-use Hunter\Core\Navigation\NavGroup;
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Contracts\ModuleServiceProvider;
+use Hunter\Module\Module\Module;
+use Hunter\Module\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
 
 final class AnalyticsServiceProvider extends ModuleServiceProvider
 {

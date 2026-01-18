@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Tests\Fixtures;
+namespace Hunter\Module\Tests\Fixtures;
 
-use Hunter\Core\Contracts\ModuleServiceProvider;
-use Hunter\Core\Module\Module;
-use Hunter\Core\Navigation\NavGroup;
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Contracts\ModuleServiceProvider;
+use Hunter\Module\Module\Module;
+use Hunter\Module\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
 
 final class FakeCrmModuleProvider extends ModuleServiceProvider
 {

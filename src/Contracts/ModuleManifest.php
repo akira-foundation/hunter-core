@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hunter\Core\Contracts;
+namespace Hunter\Module\Contracts;
 
 interface ModuleManifest
 {

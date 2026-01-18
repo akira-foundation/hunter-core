@@ -42,10 +42,10 @@ declare(strict_types=1);
 
 namespace Hunter\Analytics;
 
-use Hunter\Core\Contracts\ModuleServiceProvider;
-use Hunter\Core\Module\Module;
-use Hunter\Core\Navigation\NavGroup;
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Contracts\ModuleServiceProvider;
+use Hunter\Module\Module\Module;
+use Hunter\Module\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
 
 final class AnalyticsServiceProvider extends ModuleServiceProvider
 {
@@ -132,8 +132,8 @@ $registry->navigationGroups(); // Only NavGroup objects
 Create navigation items and groups:
 
 ```php
-use Hunter\Core\Navigation\NavItem;
-use Hunter\Core\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
+use Hunter\Module\Navigation\NavGroup;
 
 // Simple item
 $item = new NavItem(
@@ -169,7 +169,7 @@ $group->toArray();
 Protect routes based on tenant module activation:
 
 ```php
-use Hunter\Core\Http\Middleware\EnsureModuleActive;
+use Hunter\Module\Http\Middleware\EnsureModuleActive;
 
 // In routes
 Route::get('/analytics', AnalyticsController::class)

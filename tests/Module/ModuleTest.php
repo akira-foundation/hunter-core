@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Hunter\Core\Module\Module;
-use Hunter\Core\Navigation\NavItem;
+use Hunter\Module\Module\Module;
+use Hunter\Module\Navigation\NavItem;
 use Spatie\LaravelPackageTools\Package;
 
 describe('Module fluent builder', function (): void {

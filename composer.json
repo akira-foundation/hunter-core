@@ -44,13 +44,13 @@
   },
   "autoload": {
     "psr-4": {
-      "Hunter\\Core\\": "src/",
-      "Hunter\\Core\\Database\\Factories\\": "database/factories/"
+      "Hunter\\Module\\": "src/",
+      "Hunter\\Module\\Database\\Factories\\": "database/factories/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Hunter\\Core\\Tests\\": "tests/",
+      "Hunter\\Module\\Tests\\": "tests/",
       "Workbench\\App\\": "workbench/app/"
     }
   },
@@ -91,11 +91,8 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Hunter\\Core\\CoreServiceProvider"
-      ],
-      "aliases": {
-        "Core": "Hunter\\Core\\Facades\\Core"
-      }
+        "Hunter\\Module\\HunterModuleServiceProvider"
+      ]
     }
   },
   "minimum-stability": "dev",

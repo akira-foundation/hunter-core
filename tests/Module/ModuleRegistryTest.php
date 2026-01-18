@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Hunter\Core\Module\ModuleRegistry;
-use Hunter\Core\Navigation\NavGroup;
-use Hunter\Core\Navigation\NavItem;
-use Hunter\Core\Tests\Fixtures\FakeAnalyticsModuleProvider;
-use Hunter\Core\Tests\Fixtures\FakeCrmModuleProvider;
+use Hunter\Module\Module\ModuleRegistry;
+use Hunter\Module\Navigation\NavGroup;
+use Hunter\Module\Navigation\NavItem;
+use Hunter\Module\Tests\Fixtures\FakeAnalyticsModuleProvider;
+use Hunter\Module\Tests\Fixtures\FakeCrmModuleProvider;
 
 function createAnalyticsProvider(): FakeAnalyticsModuleProvider
 {
