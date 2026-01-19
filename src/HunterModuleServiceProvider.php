@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Hunter\Module;
 
 use Hunter\Module\Commands\ModuleCommand;
+use Hunter\Module\Commands\ServeCommand;
 use Hunter\Module\Http\Middleware\EnsureModuleActive;
 use Hunter\Module\Module\ModuleRegistry;
 use Illuminate\Routing\Router;
@@ -21,7 +22,8 @@ final class HunterModuleServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_hunter_core_table')
-            ->hasCommand(ModuleCommand::class);
+            ->hasCommand(ModuleCommand::class)
+            ->hasCommand(ServeCommand::class);
     }
 
     #[Override]
