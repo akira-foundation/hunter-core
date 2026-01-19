@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Hunter\Module\Navigation;
 
+use function route;
+
 final class NavItem
 {
     public string $title {
@@ -11,7 +13,7 @@ final class NavItem
     }
 
     public string $href {
-        get => $this->hrefValue;
+        get => $this->resolveHref();
     }
 
     public ?string $icon {
@@ -33,6 +35,11 @@ final class NavItem
     private string $titleValue = '';
 
     private string $hrefValue = '';
+
+    private ?string $routeName = null;
+
+    /** @var array<string, mixed> */
+    private array $routeParameters = [];
 
     private ?string $iconValue = null;
 
@@ -63,6 +70,8 @@ final class NavItem
     public function href(string $href): self
     {
         $this->hrefValue = $href;
+        $this->routeName = null;
+        $this->routeParameters = [];
 
         return $this;
     }
@@ -72,9 +81,16 @@ final class NavItem
         return $this->href($url);
     }
 
-    public function route(string $route): self
+    /**
+     * @param  array<string, mixed>  $parameters
+     */
+    public function route(string $route, array $parameters = []): self
     {
-        return $this->href($route);
+        $this->routeName = $route;
+        $this->routeParameters = $parameters;
+        $this->hrefValue = '';
+
+        return $this;
     }
 
     public function icon(?string $icon): self
@@ -123,5 +139,14 @@ final class NavItem
             'badge'    => $this->badge,
             'external' => $this->external,
         ];
+    }
+
+    private function resolveHref(): string
+    {
+        if ($this->routeName !== null) {
+            return route($this->routeName, $this->routeParameters);
+        }
+
+        return $this->hrefValue;
     }
 }

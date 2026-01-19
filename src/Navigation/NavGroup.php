@@ -10,7 +10,7 @@ final class NavGroup
         get => $this->titleValue;
     }
 
-    /** @var array<int, NavItem> */
+    /** @var array<int, NavItem|NavGroup> */
     public array $items {
         get => $this->itemsValue;
     }
@@ -33,7 +33,7 @@ final class NavGroup
 
     private string $titleValue = '';
 
-    /** @var array<int, NavItem> */
+    /** @var array<int, NavItem|NavGroup> */
     private array $itemsValue = [];
 
     private ?string $iconValue = null;
@@ -91,7 +91,7 @@ final class NavGroup
     }
 
     /**
-     * @param array<int, NavItem> $items
+     * @param  array<int, NavItem|NavGroup>  $items
      */
     public function items(array $items): self
     {
@@ -107,27 +107,34 @@ final class NavGroup
         return $this;
     }
 
+    public function group(NavGroup $group): self
+    {
+        $this->itemsValue[] = $group;
+
+        return $this;
+    }
+
     /**
-     * @return array<int, NavItem>
+     * @return array<int, NavItem|NavGroup>
      */
     public function sortedItems(): array
     {
         $items = $this->items;
 
-        usort($items, static fn (NavItem $a, NavItem $b): int => $a->order <=> $b->order);
+        usort($items, static fn (NavItem|NavGroup $a, NavItem|NavGroup $b): int => $a->order <=> $b->order);
 
         return $items;
     }
 
     /**
-     * @return array{title: string, items: array<int, array{title: string, href: string, icon: string|null, order: int, badge: string|null, external: bool}>, icon: string|null, order: int, collapsible: bool, collapsed: bool}
+     * @return array{title: string, items: array<int, array<string, mixed>>, icon: string|null, order: int, collapsible: bool, collapsed: bool}
      */
     public function toArray(): array
     {
         return [
             'title' => $this->title,
             'items' => array_map(
-                static fn (NavItem $item): array => $item->toArray(),
+                static fn (NavItem|NavGroup $item): array => $item->toArray(),
                 $this->sortedItems(),
             ),
             'icon'        => $this->icon,
